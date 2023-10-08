@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { currentUser } from '@clerk/nextjs';
+
 import SiteHeader from '@/components/layout/SiteHeader';
+import SiteFooter from '@/components/layout/SiteFooter';
 
 interface layoutProps {
   children: React.ReactNode;
 }
 
 async function LobbyLayout({ children }: layoutProps) {
-  const user = await currentUser();
   return (
     <div className='relative flex min-h-screen flex-col'>
-      <SiteHeader user={user} />
-      <main className='flex-grow'>{children}</main>
-      {/* <SiteFooter /> */}
+      <SiteHeader />
+      <main className='flex-1 container'>{children}</main>
+      <SiteFooter />
     </div>
   );
 }

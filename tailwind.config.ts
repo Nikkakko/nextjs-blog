@@ -14,6 +14,10 @@ module.exports = {
       },
     },
     extend: {
+      dropShadow: {
+        textpurple: '0px 4px 0px #692dca',
+      },
+
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

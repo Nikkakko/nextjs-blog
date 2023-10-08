@@ -3,4 +3,19 @@ const links = {
   githubAccount: 'https://github.com/Nikkakko',
 };
 
-export const siteConfig = {};
+export const siteConfig = {
+  mainNav: [
+    {
+      name: 'Home',
+      href: '/',
+    },
+    {
+      name: 'About',
+      href: '/about',
+    },
+    {
+      name: 'Contact',
+      href: '/contact',
+    },
+  ],
+};

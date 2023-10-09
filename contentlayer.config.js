@@ -15,6 +15,7 @@ const computedFields = {
     type: 'string',
     resolve: doc => doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
+
   headings: {
     type: 'json',
     resolve: async doc => {
@@ -45,6 +46,11 @@ export const Post = defineDocumentType(() => ({
     title: {
       type: 'string',
       required: true,
+    },
+
+    isFeatured: {
+      type: 'boolean',
+      default: false,
     },
     publishedAt: {
       type: 'date',

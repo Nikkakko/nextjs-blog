@@ -41,14 +41,22 @@ async function BlogPage({ params }: PageProps) {
         See all posts
       </Link>
       <div>
-        {post.publishedAt && (
-          <time
-            dateTime={post.publishedAt}
-            className='block text-sm text-muted-foreground'
-          >
-            Published on {formatDate(post.publishedAt)}
-          </time>
-        )}
+        <div className='flex flex-col space-y-1'>
+          {post.publishedAt && (
+            <time
+              dateTime={post.publishedAt}
+              className='block text-sm text-muted-foreground'
+            >
+              Published on {formatDate(post.publishedAt)}
+            </time>
+          )}
+          {post.readingTime && (
+            <span className='block text-sm text-muted-foreground'>
+              {post.readingTime.text}
+            </span>
+          )}
+        </div>
+
         <h1
           className='mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl
           drop-shadow-textpurple

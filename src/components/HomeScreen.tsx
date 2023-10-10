@@ -11,7 +11,7 @@ interface HomeScreenProps {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ blog }) => {
   return (
-    <section className=''>
+    <article className=''>
       <span
         className='text-2xl font-bold uppercase drop-shadow-textpurple
         text-center block mb-2 lg:mb-8 md:text-4xl md:text-start lg:text-5xl'
@@ -83,7 +83,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ blog }) => {
           </Link>
         </div>
       </div>
-    </section>
+    </article>
   );
 };
 

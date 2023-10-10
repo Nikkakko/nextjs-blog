@@ -3,6 +3,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import { readingTime } from 'reading-time-estimator';
 import GithubSlugger from 'github-slugger';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
@@ -34,6 +35,14 @@ const computedFields = {
         }
       );
       return headings;
+    },
+  },
+
+  readingTime: {
+    type: 'json',
+    resolve: async doc => {
+      const time = readingTime(doc.body.raw);
+      return time;
     },
   },
 };

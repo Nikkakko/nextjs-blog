@@ -5,7 +5,6 @@ import RecentPosts from '@/components/RecentPosts';
 import { categories, siteConfig } from '@/config/site';
 import { sortBlogs } from '@/lib/utils';
 import { allPosts } from 'contentlayer/generated';
-
 import * as React from 'react';
 
 export default async function IndexPage() {

@@ -2,12 +2,13 @@ import * as React from 'react';
 import { allPosts } from 'contentlayer/generated';
 import { Mdx } from '@/components/mdx/mdx-components';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
 import { cn, formatDate } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
+import { siteMetadata } from '@/lib/siteMetadata';
 
 interface PageProps {
   params: {
@@ -15,18 +16,60 @@ interface PageProps {
   };
 }
 
-async function getDocFromParams(slug: string) {
-  const post = allPosts.find(it => it.slugAsParams === slug);
+export async function generateStaticParams() {
+  return allPosts.map(post => ({ params: { slug: post.slugAsParams } }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    slug: string;
+  };
+}) {
+  const post = allPosts.find(it => it.slugAsParams === params.slug);
 
   if (!post) {
     return notFound();
   }
 
-  return post;
+  const publishedAt = new Date(post.publishedAt).toISOString();
+  const modifiedAt = new Date(post.updatedAt || post.publishedAt).toISOString();
+
+  const authors = post.author ? [post.author] : siteMetadata.author;
+
+  return {
+    title: post.title,
+    description: post.description,
+
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: siteMetadata.siteUrl + post.slug,
+      siteName: siteMetadata.title,
+      locale: 'en_US',
+      type: 'article',
+      publishedTime: publishedAt,
+      modifiedTime: modifiedAt,
+      authors: authors.length > 0 ? authors : siteMetadata.author,
+      images: [siteMetadata.socialBanner],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: siteMetadata.title,
+      images: [siteMetadata.socialBanner],
+    },
+  };
 }
 
 async function BlogPage({ params }: PageProps) {
-  const post = await getDocFromParams(params.slug);
+  const post = allPosts.find(it => it.slugAsParams === params.slug);
+  console.log(post?.slug);
+
+  if (!post) {
+    return notFound();
+  }
 
   return (
     <article className='container relative max-w-3xl py-6 lg:py-10'>

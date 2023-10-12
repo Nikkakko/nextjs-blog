@@ -46,7 +46,9 @@ const CategoriesBar: React.FC<CategoriesBarProps> = ({ categories, title }) => {
                   })
                 )}
               >
-                <h2 className='inline-block text-center w-max'>{category}</h2>
+                <h2 className='inline-block text-center w-max'>
+                  {category.replace(/\.|-|%20/g, ' ')}
+                </h2>
               </Link>
             </div>
           ))}

@@ -26,3 +26,7 @@ export const sortBlogs = (blogs: Post[]) => {
       compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt))
     );
 };
+
+export function slugify(text: string) {
+  return text.replace(/\.|-|%20/g, ' ');
+}

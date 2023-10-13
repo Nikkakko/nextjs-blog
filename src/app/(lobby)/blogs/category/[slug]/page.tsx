@@ -20,8 +20,12 @@ export async function generateMetadata({
     slug: string;
   };
 }) {
+  const capitalizedTitle =
+    params.slug.charAt(0).toUpperCase() +
+    params.slug.slice(1).replaceAll('-', ' ');
+
   return {
-    title: `${params.slug.replaceAll('-', ' ')} blogs`,
+    title: `${capitalizedTitle} Blogs`,
     description: `Learn more about ${
       params.slug === 'all' ? 'web development' : params.slug
     } through our collection of expert blogs and tutorials`,

@@ -9,6 +9,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { siteMetadata } from '@/lib/siteMetadata';
+import ViewCounter from '@/components/ViewCounter';
 
 interface PageProps {
   params: {
@@ -65,7 +66,6 @@ export async function generateMetadata({
 
 async function BlogPage({ params }: PageProps) {
   const post = allPosts.find(it => it.slugAsParams === params.slug);
-  console.log(post?.slug);
 
   if (!post) {
     return notFound();
@@ -108,20 +108,25 @@ async function BlogPage({ params }: PageProps) {
           {post.title}
         </h1>
 
-        <div className='flex items-center mt-4 space-x-2'>
-          <Link href={`https://github.com/nikkakko`}>
-            <Image
-              src='/images/avatar/avatar.png'
-              alt='avatar'
-              width={40}
-              height={40}
-              className='rounded-full bg-white'
-            />
-          </Link>
-          <div className='flex flex-col leading-tight'>
-            <span className=' text-sm'>Author</span>
-            <span className='text-xs text-muted-foreground'>{post.author}</span>
+        <div className='flex justify-between items-end '>
+          <div className='flex items-center mt-4 space-x-2'>
+            <Link href={`https://github.com/nikkakko`}>
+              <Image
+                src='/images/avatar/avatar.png'
+                alt='avatar'
+                width={40}
+                height={40}
+                className='rounded-full bg-white'
+              />
+            </Link>
+            <div className='flex flex-col leading-tight'>
+              <span className=' text-sm'>Author</span>
+              <span className='text-xs text-muted-foreground'>
+                {post.author}
+              </span>
+            </div>
           </div>
+          <ViewCounter slug={params.slug} />
         </div>
       </div>
 

@@ -28,6 +28,7 @@ const RecentPostCard: React.FC<{ post: Post }> = ({ post }) => {
             src={post.image}
             alt='Image'
             fill
+            sizes='(min-width: 1024px) 500px, 100vw'
             className='rounded-md object-cover'
           />
         </div>

@@ -71,11 +71,9 @@ const ViewCounter: React.FC<ViewCounterProps> = ({
 
   if (showCount) {
     return (
-      <div>
-        <Badge variant='outline' className='rounded-sm'>
-          {views} Views
-        </Badge>
-      </div>
+      <Badge variant='outline' className='rounded-sm'>
+        {views} Views
+      </Badge>
     );
   } else {
     return null;

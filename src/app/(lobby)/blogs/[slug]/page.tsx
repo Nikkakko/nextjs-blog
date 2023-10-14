@@ -10,6 +10,7 @@ import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { siteMetadata } from '@/lib/siteMetadata';
 import ViewCounter from '@/components/ViewCounter';
+import TableofContents from '@/components/TableofContents';
 
 interface PageProps {
   params: {
@@ -72,7 +73,7 @@ async function BlogPage({ params }: PageProps) {
   }
 
   return (
-    <article className='container relative max-w-3xl py-6 lg:py-10'>
+    <article className='relative max-w-3xl py-6 lg:py-10 mx-auto'>
       <Link
         href='/blogs'
         className={cn(
@@ -141,37 +142,7 @@ async function BlogPage({ params }: PageProps) {
         />
       )}
 
-      {/* Refactor TOC Component */}
-      {/* <div className='my-8  absolute left-[-200px] top-20 hidden xl:inline-flex  '>
-        <ul className='mt-4 font-in text-base sticky'>
-          {post.headings.map(
-            (heading: { level: string; text: string; slug: string }) => {
-              return (
-                <li key={`#${heading.slug}`} className='py-1'>
-                  <a
-                    href={`#${heading.slug}`}
-                    data-level={heading.level}
-                    className='data-[level=two]:pl-0  data-[level=two]:pt-2
-                                       data-[level=two]:border-t border-solid border-dark/40
-                                       data-[level=three]:pl-4
-                                       sm:data-[level=three]:pl-6
-                                       flex items-center justify-start
-                                       '
-                  >
-                    {heading.level === 'three' ? (
-                      <span className='flex w-1 h-1 rounded-full bg-dark mr-2'>
-                        &nbsp;
-                      </span>
-                    ) : null}
-
-                    <span className='hover:underline'>{heading.text}</span>
-                  </a>
-                </li>
-              );
-            }
-          )}
-        </ul>
-      </div> */}
+      <TableofContents headings={post.headings} />
       <Mdx code={post?.body.code} />
     </article>
   );

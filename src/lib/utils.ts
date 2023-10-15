@@ -30,3 +30,7 @@ export const sortBlogs = (blogs: Post[]) => {
 export function slugify(text: string) {
   return text.replace(/\.|-|%20/g, ' ');
 }
+
+export function truncateText(text: string, length: number) {
+  return text.length > length ? text.substring(0, length) + '...' : text;
+}

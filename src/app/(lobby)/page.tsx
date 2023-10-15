@@ -1,3 +1,4 @@
+import * as React from 'react';
 import CategoriesBar from '@/components/CategoriesBar';
 import FeaturedPosts from '@/components/FeaturedPosts';
 import HomeScreen from '@/components/HomeScreen';
@@ -5,7 +6,6 @@ import RecentPosts from '@/components/RecentPosts';
 import { categories, siteConfig } from '@/config/site';
 import { sortBlogs } from '@/lib/utils';
 import { allPosts } from 'contentlayer/generated';
-import * as React from 'react';
 
 export default async function IndexPage() {
   const blog = allPosts.find(blog => blog.title === 'Next.js');

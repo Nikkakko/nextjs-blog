@@ -22,7 +22,7 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ recentPosts, title }) => {
       </h1>
 
       <div className='flex flex-col md:flex-row md:gap-8  relative'>
-        <div className='flex flex-col md:gap-6 gap-4'>
+        <div className='flex  flex-col md:gap-6 gap-4'>
           {recentPosts.map(post => (
             <RecentPostCard key={post.slug} post={post} />
           ))}

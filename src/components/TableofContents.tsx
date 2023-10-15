@@ -27,7 +27,7 @@ interface TableofContentsProps {
 
 const TableofContents: React.FC<TableofContentsProps> = ({ headings }) => {
   return (
-    <Collapsible className='mt-6 border rounded-md '>
+    <Collapsible className='mt-6 border rounded-md'>
       <CollapsibleTrigger
         className='w-full cursor-pointer flex items-center justify-start text-sm font-medium
          py-2 px-4 '
@@ -36,30 +36,37 @@ const TableofContents: React.FC<TableofContentsProps> = ({ headings }) => {
         Table of Contents
       </CollapsibleTrigger>
       <CollapsibleContent className='px-4'>
-        {headings.map(
-          (heading: { level: string; text: string; slug: string }) => {
-            return (
-              <Link
-                href={`#${heading.slug}`}
-                data-level={heading.level}
-                className='data-[level=two]:pl-0  data-[level=two]:pt-2
-                                       data-[level=two]:border-t border-solid border-dark/40
-                                       data-[level=three]:pl-4
-                                       sm:data-[level=three]:pl-6
-                                       flex items-center justify-start
-                                       '
-              >
-                {heading.level === 'three' ? (
-                  <span className='flex w-1 h-1 rounded-full bg-dark mr-2'>
-                    &nbsp;
-                  </span>
-                ) : null}
+        <ul className='flex flex-col'>
+          {headings.map(
+            (heading: { level: string; text: string; slug: string }) => {
+              return (
+                <li
+                  className='list-disc list-inside
+                  font-medium text-sm  mb-2
+                  text-muted-foreground
+                  hover:text-purple-400
+                  data-[level=two]:list-none
+                 
+                  
+                  data-[level=three]:pl-2
+                '
+                  key={heading.slug}
+                  data-level={heading.level}
+                >
+                  <Link href={`#${heading.slug}`} data-level={heading.level}>
+                    {heading.level === 'two' ? (
+                      <span className='flex w-1 h-1 rounded-full bg-dark mr-2'>
+                        &nbsp;
+                      </span>
+                    ) : null}
 
-                <span className='hover:underline'>{heading.text}</span>
-              </Link>
-            );
-          }
-        )}
+                    <span className='hover:underline'>{heading.text}</span>
+                  </Link>
+                </li>
+              );
+            }
+          )}
+        </ul>
       </CollapsibleContent>
     </Collapsible>
   );

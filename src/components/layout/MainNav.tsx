@@ -3,12 +3,12 @@ import * as React from 'react';
 import { MainNavItem } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
-import { devBlogLogo } from 'public/assets';
 import { ModeToggle } from '../theme-toggle';
 import { cn } from '@/lib/utils';
 
 import { usePathname } from 'next/navigation';
 import { buttonVariants } from '../ui/button';
+import SearchBox from '../SearchBox';
 interface MainNavProps {
   items: MainNavItem[];
 }
@@ -30,6 +30,7 @@ const MainNav: React.FC<MainNavProps> = ({ items }) => {
       </Link>
 
       <nav className='flex items-center space-x-6'>
+        <SearchBox />
         {items.map(item => {
           const isActive = item.href === pathname;
           return (

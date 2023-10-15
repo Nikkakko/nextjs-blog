@@ -11,8 +11,9 @@ export const categories = [
 ];
 
 const links = {
-  github: 'https://github.com/Nikkakko/online-marketplace',
+  linkedIn: ' https://www.linkedin.com/in/nika-kopadze/',
   githubAccount: 'https://github.com/Nikkakko',
+  discord: 'https://discord.com/channels/874664784959668480/874664784959668483',
 };
 
 export const siteConfig = {

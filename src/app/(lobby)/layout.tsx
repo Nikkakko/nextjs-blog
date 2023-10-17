@@ -11,7 +11,7 @@ async function LobbyLayout({ children }: layoutProps) {
   return (
     <div className='relative flex min-h-screen flex-col'>
       <SiteHeader />
-      <main className=' flex-1 container'>{children}</main>
+      <main className=' flex-1'>{children}</main>
       <SiteFooter />
     </div>
   );

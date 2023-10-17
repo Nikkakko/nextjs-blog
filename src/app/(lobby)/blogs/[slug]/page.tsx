@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { siteMetadata } from '@/lib/siteMetadata';
 import ViewCounter from '@/components/ViewCounter';
 import TableofContents from '@/components/TableofContents';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface PageProps {
   params: {
@@ -132,14 +133,20 @@ async function BlogPage({ params }: PageProps) {
       </div>
 
       {post.image && (
-        <Image
-          src={post.image}
-          alt={post.title}
-          width={720}
-          height={405}
-          className='my-8 rounded-md border bg-muted transition-colors'
-          priority
-        />
+        <div
+          className='relative w-full mt-4
+          aspect-[16/9] xl:aspect-[16/9]
+        '
+        >
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            className='rounded-md object-cover'
+            priority
+          />
+        </div>
       )}
 
       <TableofContents headings={post.headings} />

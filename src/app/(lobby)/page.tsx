@@ -20,7 +20,7 @@ export default async function IndexPage() {
   }
 
   return (
-    <div className='mt-4 lg:mt-8'>
+    <div className='mt-4 lg:mt-8 container'>
       <HomeScreen blog={blog} />
       <CategoriesBar categories={categories} title='Categories' />
       {/* <FeaturedPosts featuredPosts={featuredPosts} /> */}

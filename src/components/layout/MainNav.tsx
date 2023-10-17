@@ -59,7 +59,7 @@ const MainNav: React.FC<MainNavProps> = ({ items }) => {
                 size: 'default',
               })
             )}
-            href='mailto:nikolozkopadze@gmail.com'
+            href='/contact'
           >
             <span
               className='

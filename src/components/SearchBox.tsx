@@ -25,8 +25,6 @@ import { Post, allPosts } from 'contentlayer/generated';
 import { Button } from './ui/button';
 import { SearchIcon } from 'lucide-react';
 
-import { is } from 'date-fns/locale';
-
 interface SearchBoxProps {}
 
 const SearchBox: React.FC<SearchBoxProps> = ({}) => {
@@ -56,13 +54,22 @@ const SearchBox: React.FC<SearchBoxProps> = ({}) => {
     }
   }, [debouncedQuery, startTransition]);
 
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'j' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsOpen(open => !open);
+      }
+    };
+
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
+
   const handleSelect = React.useCallback((callback: () => unknown) => {
     setIsOpen(false);
     callback();
   }, []);
-
-  console.log(debouncedQuery);
-  console.log(data);
 
   return (
     <>
@@ -71,9 +78,22 @@ const SearchBox: React.FC<SearchBoxProps> = ({}) => {
         className='relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2'
         onClick={() => setIsOpen(true)}
       >
-        <SearchIcon className='h-4 w-4 xl:mr-2' aria-hidden='true' />
-        <span className='hidden xl:inline-flex'>Search Posts...</span>
-        <span className='sr-only'>Search Posts </span>
+        <div className='flex items-center justify-between w-full'>
+          <div className='flex items-center'>
+            <SearchIcon className='h-4 w-4 xl:mr-2' aria-hidden='true' />
+            <span className='hidden xl:inline-flex'>Search Posts...</span>
+            <span className='sr-only'>Search Posts </span>
+          </div>
+          <div className='flex justify-end'>
+            {' '}
+            <p className='text-sm text-muted-foreground'>
+              Press{' '}
+              <kbd className='pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100'>
+                <span className='text-xs'>⌘</span>J
+              </kbd>
+            </p>
+          </div>
+        </div>
       </Button>
 
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -85,27 +105,24 @@ const SearchBox: React.FC<SearchBoxProps> = ({}) => {
 
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          {data?.map(post => (
-            <CommandGroup
-              title={post.title}
-              heading='Search Results'
-              key={post.title}
-            >
+          <CommandGroup title='Search Results' heading='Search Results'>
+            {data?.map(post => (
               <CommandItem
                 value={post.title}
+                key={post.title}
                 className='cursor-pointer 
                     hover:saturate-150 hover:brightness-125 hover:shadow-lg
                 '
                 onSelect={() =>
-                  handleSelect(() => router.push(`/blogs/${post.slug}`))
+                  handleSelect(() => router.push(`/blogs/${post.slugAsParams}`))
                 }
               >
                 <div className='flex items-center space-x-2'>
                   <span>{post.title}</span>
                 </div>
               </CommandItem>
-            </CommandGroup>
-          ))}
+            ))}
+          </CommandGroup>
         </CommandList>
       </CommandDialog>
     </>

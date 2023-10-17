@@ -12,8 +12,7 @@ export const categories = [
 
 const links = {
   linkedIn: ' https://www.linkedin.com/in/nika-kopadze/',
-  githubAccount: 'https://github.com/Nikkakko',
-  discord: 'https://discord.com/channels/874664784959668480/874664784959668483',
+  github: 'https://github.com/Nikkakko',
 };
 
 export const siteConfig = {
@@ -26,9 +25,7 @@ export const siteConfig = {
       name: 'About',
       href: '/about',
     },
-    {
-      name: 'Contact',
-      href: '/contact',
-    },
   ],
+
+  links,
 };

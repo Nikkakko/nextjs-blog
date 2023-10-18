@@ -1,8 +1,10 @@
 'use server';
-import ContactForm from '@/components/ContactForm';
+
 import { formSchema } from '@/lib/validation';
 import { Resend } from 'resend';
 import { type z } from 'zod';
+import * as React from 'react';
+import ContactEmail from '@/email/contact-email';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -22,6 +24,11 @@ export const emailSend = async (input: Inputs) => {
       subject: `New message from ${input.name}`,
       reply_to: input.email,
       text: input.message,
+      react: ContactEmail({
+        name: input.name,
+        email: input.email,
+        message: input.message,
+      }),
     });
 
     return {

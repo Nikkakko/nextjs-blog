@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 interface ContactFormProps {
-  input: {
-    name: string;
-    email: string;
-    message: string;
-  };
+  name: string;
+  email: string;
+  message: string;
 }
 
 const ContactEmail: React.FC<Readonly<ContactFormProps>> = ({
-  input: { name, email, message },
+  name,
+  email,
+  message,
 }) => {
   return (
     <div>

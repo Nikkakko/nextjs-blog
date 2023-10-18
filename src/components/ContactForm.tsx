@@ -27,13 +27,17 @@ import { formSchema } from '@/lib/validation';
 import { Textarea } from './ui/textarea';
 import { Send } from 'lucide-react';
 import { emailSend } from '@/app/_actions/emailSend';
+import { useToast } from './ui/use-toast';
 
 interface ContactFormProps {}
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const [isPending, startTransition] = React.useTransition();
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+
     defaultValues: {
       email: '',
       message: '',
@@ -46,16 +50,31 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     // ✅ This will be type-safe and validated.
     startTransition(async () => {
       try {
-        await emailSend(values);
+        const result = await emailSend(values);
+
+        if (result.success) {
+          toast({
+            title: 'Message sent',
+            description: 'Your message was sent successfully.',
+            duration: 5000,
+          });
+
+          form.reset();
+        }
       } catch (error) {
-        console.error(error);
+        toast({
+          title: 'Message failed',
+          description: 'Your message failed to send.',
+
+          duration: 5000,
+        });
       }
     });
   }
   return (
     <Card className='w-full'>
       <CardHeader>
-        <CardTitle>Contact Me!</CardTitle>
+        <CardTitle>Contact Me</CardTitle>
         <CardDescription>Send me a message.</CardDescription>
       </CardHeader>
       <CardContent>

@@ -78,13 +78,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({}) => {
         className='relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2'
         onClick={() => setIsOpen(true)}
       >
-        <div className='flex items-center justify-between w-full'>
+        <div className='flex items-center justify-center xl:justify-between w-full'>
           <div className='flex items-center'>
             <SearchIcon className='h-4 w-4 xl:mr-2' aria-hidden='true' />
             <span className='hidden xl:inline-flex'>Search Posts...</span>
             <span className='sr-only'>Search Posts </span>
           </div>
-          <div className='flex justify-end'>
+          <div className='hidden xl:inline-flex justify-end'>
             {' '}
             <p className='text-sm text-muted-foreground'>
               Press{' '}

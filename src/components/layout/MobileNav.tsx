@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 import { ModeToggle } from '../theme-toggle';
 import Image from 'next/image';
 import { devBlogLogo } from 'public/assets';
+import SearchBox from '../SearchBox';
 interface MobileNavProps {
   items: MainNavItem[];
 }
@@ -51,6 +52,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
       </Link>
 
       <div className='flex items-center space-x-2'>
+        <SearchBox />
         <Sheet open={isOpen} onOpenChange={setIsOpen} modal defaultOpen={true}>
           <SheetTrigger asChild>
             <Button

@@ -2,6 +2,8 @@ import { Post } from 'contentlayer/generated';
 import * as React from 'react';
 import RecentPostCard from './RecentPostCard';
 import TrendingPosts from './TrendingPosts';
+import { Link as LinkIcon } from 'lucide-react';
+import Link from 'next/link';
 
 interface RecentPostsProps {
   recentPosts: Post[];
@@ -26,6 +28,15 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ recentPosts, title }) => {
           {recentPosts.map(post => (
             <RecentPostCard key={post.slug} post={post} />
           ))}
+          <div className='flex  justify-end'>
+            <Link
+              href='/blogs/category/all'
+              className=' capitalize underline cursor-pointer flex items-center'
+            >
+              see new more articles
+              <LinkIcon className='h-4 w-4 ml-2' aria-hidden='true' />
+            </Link>
+          </div>
         </div>
         <TrendingPosts />
       </div>

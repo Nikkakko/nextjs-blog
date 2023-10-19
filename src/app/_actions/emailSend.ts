@@ -3,7 +3,6 @@
 import { formSchema } from '@/lib/validation';
 import { Resend } from 'resend';
 import { type z } from 'zod';
-import * as React from 'react';
 import ContactEmail from '@/email/contact-email';
 
 const resend = new Resend(process.env.RESEND_API_KEY);

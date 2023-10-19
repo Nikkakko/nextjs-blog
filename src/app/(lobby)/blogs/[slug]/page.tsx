@@ -74,12 +74,12 @@ async function BlogPage({ params }: PageProps) {
   }
 
   return (
-    <article className='relative max-w-3xl py-6 lg:py-10 mx-auto'>
+    <article className='relative px-4 xl:px-0 max-w-3xl py-6 lg:py-10 mx-auto'>
       <Link
-        href='/blogs'
+        href='/blogs/category/all'
         className={cn(
-          buttonVariants({ variant: 'ghost' }),
-          'absolute left-[-200px] top-14 hidden xl:inline-flex'
+          buttonVariants({ variant: 'link', className: 'p-0' }),
+          'static xl:absolute xl:left-[-200px] xl:top-14  xl:inline-flex'
         )}
       >
         <ChevronLeft className='mr-2 h-4 w-4' />

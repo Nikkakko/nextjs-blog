@@ -10,7 +10,6 @@ import { allPosts } from 'contentlayer/generated';
 export default async function IndexPage() {
   const blog = allPosts.find(blog => blog.title === 'Next.js');
 
-  const featuredPosts = sortBlogs(allPosts.filter(blog => blog.isFeatured));
   const recentPosts = sortBlogs(
     allPosts.slice(0, 6).filter(blog => blog.title !== 'Next.js')
   );
